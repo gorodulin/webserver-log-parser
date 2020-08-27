@@ -23,15 +23,15 @@ Usage: parser.rb [options] [FILE]
 There are two reports available: `total` and `unique`:
 
 ```bash
-./parser.rb --type total webserver.log # default report
-./parser.rb --type unique webserver.log
+./parser.rb --report total webserver.log # default report
+./parser.rb --report unique webserver.log
 ```
 
 Parser accepts STDIN input and pipes:
 
 ```bash
-cat webserver.log | ./parser.rb --type unique
-./parser.rb --type total < webserver.log
+cat webserver.log | ./parser.rb --report unique
+./parser.rb --report total < webserver.log
 ./parser.rb < webserver.log
 ```
 

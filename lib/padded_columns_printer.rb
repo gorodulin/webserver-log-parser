@@ -2,43 +2,31 @@
 
 class PaddedColumnsPrinter
 
-  class FormattedReport
-
-    include Enumerable
-
-    attr_reader :formatter
-    attr_reader :report
-    attr_reader :widths
-
-    def initialize(report, widths, formatter)
-      @formatter = formatter
-      @report = report
-      @widths = widths
-    end
-
-    def each
-      report.each do |record|
-        yield formatter.call(record, widths) % record
-      end
-    end
-
-  end # ... FormattedReport
+  include Enumerable
 
   DEFAULT_FORMATTER = ->(_record, _widths) { "%{path}%{count}" }
 
   attr_reader :formatter
+  attr_reader :report
+  attr_reader :widths
 
   # Formatter must be a callable that takes a hash containing column widths as an argument
   def initialize(formatter: DEFAULT_FORMATTER)
     fail ArgumentError, "Expect formatter to be callable" unless formatter.respond_to?(:call)
-
     @formatter = formatter
+    load({})
   end
 
-  # @return an iterable object that produces formatted lines
-  def call(report)
-    widths = calculate_column_widths(report)
-    FormattedReport.new(report, widths, formatter)
+  def load(report)
+    @report = report
+    @widths = calculate_column_widths(report)
+    self
+  end
+
+  def each
+    report.each do |record|
+      yield formatter.call(record, widths) % record
+    end
   end
 
   # @return [Hash]

@@ -19,16 +19,22 @@ RSpec.describe PaddedColumnsPrinter do
 
   end # ... describe
 
-  describe "#call" do
+  describe "#load" do
 
-    it "returns iterator that produces formatted report" do
-      result = instance.call(report)
-      expect(result).to respond_to(:each)
-      result_as_text = result.to_a.join("\n")
-      expected = "aaaaaaaa  00000000000000\nbbbbbbbbb 0000000000000000000"
-      expect(result_as_text).to eq(expected)
+    it "loads report and returns self" do
+      result = instance.load(report)
+      expect(instance.report).to eq(report)
+      expect(result).to eq(instance)
     end
 
   end # ... describe
+
+  describe "#each" do
+
+    it "returns Enumerable" do
+      expect(instance.each).to be_a(Enumerable)
+    end
+
+  end
 
 end

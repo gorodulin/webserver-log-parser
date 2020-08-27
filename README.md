@@ -45,7 +45,7 @@ DI is widely used in the project. Classes are usually instantiable. Instance var
 
 `BuildReport` is an abstraction layer that calls other classes to parse input, perform actual data transformation and output the result.
 `CountTotalVisits` and `CountUniqueVisitors` are report builder classes. They build reports in memory, that may be sub-optimal if the input is really huge. It's fixable though. All other classes support streaming and allow to iterate through the records.
-`PaddedColumnsPrinter` is an renderer class example. Renderers must return an enumerable object that can be read line by line. In particular, this class returns an instance of `FormattedReport` class that actually formats report streams. Output is aligned in columns, because.. why not?
+`PaddedColumnsPrinter` is an renderer class example. Renderers must return an enumerable object that can be read line by line. Output is aligned in columns, because.. why not?
 
 ### Extendibility
 

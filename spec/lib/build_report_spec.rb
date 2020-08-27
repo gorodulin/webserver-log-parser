@@ -34,9 +34,9 @@ RSpec.describe BuildReport do
         instance.call(payload)
       end
 
-      it "produces report" do
+      it "returns report" do
         result = instance.call(payload)
-        expect(result).to be_a(::PaddedColumnsPrinter::FormattedReport)
+        expect(result).to respond_to(:each)
         expect(result.to_a).to eq(["/help_page/1 1"])
       end
 

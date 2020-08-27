@@ -14,6 +14,7 @@ class BuildReport
     @reporter = reporter
   end
 
+  # Note: may be called more than once to collect data from several sources
   def call(source)
     source.each do |line|
       parsed_line = line_parser.call(line)
@@ -23,7 +24,7 @@ class BuildReport
         on_parse_error.call(line)
       end
     end
-    renderer.call(reporter.report)
+    renderer.load(reporter.report)
   end
 
 end
